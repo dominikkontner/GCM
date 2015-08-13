@@ -21,6 +21,29 @@ or
 * compile("com.fasterxml.jackson.core:jackson-databind:2.6.1")
 * compile('org.slf4j:slf4j-simple:1.6.1')
 
+
+# Usage
+
+Send a simple push message to one client and display an Android Notification.
+
+```
+Sender sender = new Sender("<yourAPIkey>")
+
+Notification n = new Notification();
+n.setTitle("Some Title");
+n.setBody("Some Text");
+n.setIcon("notification_icon");
+
+SimpleMessage message = new SimpleMessage();
+message.setTo("<client registration_id>");
+message.setNotification(n);
+
+//blocking call
+sender.sendMessageNoRetry(message);
+```
+
+
+
 ## Roadmap
 
 * Sender.sendMessage(...) - send message with exponential backoff retry
