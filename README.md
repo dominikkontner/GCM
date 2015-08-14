@@ -4,7 +4,7 @@ Library for sending GCM push messages. Currently UNSTABLE - API will change unti
 
 I decided to write this lib from scratch because https://github.com/google/gcm wasn't very easy to bring up to date and has much more code than it should have.
 
-
+This library uses GCMs JSON interface
 ## create jar file
 
 ```
@@ -22,7 +22,7 @@ or
 * compile('org.slf4j:slf4j-simple:1.6.1')
 
 
-# Usage
+## Usage
 
 Send a simple push message to one client and display an Android Notification.
 
