@@ -67,17 +67,85 @@ public class Sender {
   }
 
 
+  /**
+   * sends a topic push message with no retry
+   * <p/>
+   * "to" field must have "/topics/" prefix i.e: "/topics/foobar"
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if request fails
+   */
   public TopicMessageResponse sendMessageNoRetry(TopicMessage message) throws IOException {
     return (TopicMessageResponse) sendMessageNoRetry(message, TopicMessageResponse.class);
   }
+
+
+  /**
+   * sends a push message with no retry to one recipient
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if request fails
+   */
 
   public SimpleMessageResponse sendMessageNoRetry(SimpleMessage message) throws IOException {
     return (SimpleMessageResponse) sendMessageNoRetry(message, SimpleMessageResponse.class);
   }
 
+
+  /**
+   * sends a push message with no retry to 1-1000 recipients
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if request fails
+   */
   public SimpleMessageResponse sendMessageNoRetry(MulticastMessage message) throws IOException {
     return (SimpleMessageResponse) sendMessageNoRetry(message, SimpleMessageResponse.class);
   }
+
+  /**
+   * sends a topic push message with exponential backoff retry (3 times)
+   * <p/>
+   * "to" field must have "/topics/" prefix i.e: "/topics/foobar"
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if all attempts are not successful
+   */
+  public TopicMessageResponse sendMessage(TopicMessage message) throws IOException {
+    return (TopicMessageResponse) sendMessage(message, TopicMessageResponse.class);
+  }
+
+
+  /**
+   * sends a push message to one recipient with exponential backoff retry (3 times)
+   * <p/>
+   * "to" field must have "/topics/" prefix i.e: "/topics/foobar"
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if all attempts are not successful
+   */
+  public SimpleMessageResponse sendMessage(SimpleMessage message) throws IOException {
+    return (SimpleMessageResponse) sendMessage(message, SimpleMessageResponse.class);
+  }
+
+
+  /**
+   * sends a push message to 1-1000 recipients with exponential backoff retry (3 times)
+   * <p/>
+   * "to" field must have "/topics/" prefix i.e: "/topics/foobar"
+   *
+   * @param message Server Request
+   * @return Server Response
+   * @throws IOException if all attempts are not successful
+   */
+  public SimpleMessageResponse sendMessage(MulticastMessage message) throws IOException {
+    return (SimpleMessageResponse) sendMessage(message, SimpleMessageResponse.class);
+  }
+
 
   /**
    * Sends a message to gcm push service and returns the server result.

@@ -2,9 +2,18 @@
 
 Library for sending GCM push messages. Currently UNSTABLE - API will change until version 1.0.0.
 
-I decided to write this lib from scratch because https://github.com/google/gcm wasn't very easy to bring up to date and has much more code than it should have.
+I decided to write this lib from scratch because https://github.com/google/gcm doesn't seem very maintainable.
 
-This library uses GCMs JSON interface
+This library uses GCMs JSON interface only (no plain http or XAMPP support).
+
+## Supports
+
+* Single Push Message
+* Topic Message
+* Multicast
+* exponential backoff retry mechanism
+
+
 ## create jar file
 
 ```
@@ -42,16 +51,17 @@ message.setNotification(n);
 sender.sendMessageNoRetry(message);
 ```
 
+## Limitations
 
-
-## Roadmap
-
-* Sender.sendMessage(...) - send message with exponential backoff retry
-* Add JavaDoc
-* Unit Tests
+GCM is only a java client for GCM Server which doesn't handle the server result in any ways.
+It takes a message, delivers it, returns the server result.
 
 
 ## Changelog
+
+### 0.2
+* adds Notification Constructor with required fields
+* adds Sender.sendMessage(...) with exponential backoff
 
 ### 0.1
 * initial Version
