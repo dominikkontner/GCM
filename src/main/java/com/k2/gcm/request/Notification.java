@@ -50,6 +50,21 @@ public class Notification {
    */
   private String click_action;
 
+
+  public Notification() {
+  }
+
+  /**
+   * @param title Notification Title
+   * @param body Notification Body
+   * @param icon Notification icon
+   */
+  public Notification(String title, String body, String icon) {
+    this.title = title;
+    this.body = body;
+    this.icon = icon;
+  }
+
   public String getTitle() {
     return title;
   }
