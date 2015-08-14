@@ -1,5 +1,6 @@
 package com.k2.gcm.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.k2.gcm.request.Result;
 
 import java.util.List;
@@ -13,7 +14,8 @@ public class SimpleMessageResponse {
   /**
    * Unique ID(number)identifying the multicast message
    */
-  private String multicast_id;
+  @JsonProperty("multicast_id")
+  private String multicastId;
 
   /**
    * Number of messages that were processed without an error.
@@ -29,7 +31,8 @@ public class SimpleMessageResponse {
    * Number of results that contain a canonical registration token. See the registration overview
    * for more discussion of this topic.
    */
-  private int canonical_ids;
+  @JsonProperty("canonical_ids")
+  private int canonicalIds;
 
   /**
    * Array of objects representing the status of the messages processed.
@@ -38,12 +41,12 @@ public class SimpleMessageResponse {
    */
   private List<Result> results;
 
-  public String getMulticast_id() {
-    return multicast_id;
+  public String getMulticastId() {
+    return multicastId;
   }
 
-  public void setMulticast_id(String multicast_id) {
-    this.multicast_id = multicast_id;
+  public void setMulticastId(String multicastId) {
+    this.multicastId = multicastId;
   }
 
   public int getSuccess() {
@@ -62,12 +65,12 @@ public class SimpleMessageResponse {
     this.failure = failure;
   }
 
-  public int getCanonical_ids() {
-    return canonical_ids;
+  public int getCanonicalIds() {
+    return canonicalIds;
   }
 
-  public void setCanonical_ids(int canonical_ids) {
-    this.canonical_ids = canonical_ids;
+  public void setCanonicalIds(int canonicalIds) {
+    this.canonicalIds = canonicalIds;
   }
 
   public List<Result> getResults() {
@@ -83,10 +86,10 @@ public class SimpleMessageResponse {
   @Override
   public String toString() {
     return "DownstreamMessageResponse{" +
-      "multicast_id='" + multicast_id + '\'' +
+      "multicast_id='" + multicastId + '\'' +
       ", success=" + success +
       ", failure=" + failure +
-      ", canonical_ids=" + canonical_ids +
+      ", canonical_ids=" + canonicalIds +
       ", results=" + results +
       '}';
   }
