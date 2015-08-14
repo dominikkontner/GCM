@@ -11,36 +11,21 @@ import java.util.List;
  */
 public class SimpleMessageResponse {
 
-  /**
-   * Unique ID(number)identifying the multicast message
-   */
+
   @JsonProperty("multicast_id")
   private String multicastId;
 
-  /**
-   * Number of messages that were processed without an error.
-   */
   private int success;
-
-  /**
-   * number	Number of messages that could not be processed.
-   */
   private int failure;
 
-  /**
-   * Number of results that contain a canonical registration token. See the registration overview
-   * for more discussion of this topic.
-   */
   @JsonProperty("canonical_ids")
   private int canonicalIds;
 
-  /**
-   * Array of objects representing the status of the messages processed.
-   * The objects are listed in the same order as the request (i.e., for each registration ID in the request,
-   * its result is listed in the same index in the response).
-   */
   private List<Result> results;
 
+  /**
+   * Unique ID(number)identifying the multicast message
+   */
   public String getMulticastId() {
     return multicastId;
   }
@@ -49,6 +34,9 @@ public class SimpleMessageResponse {
     this.multicastId = multicastId;
   }
 
+  /**
+   * Number of messages that were processed without an error.
+   */
   public int getSuccess() {
     return success;
   }
@@ -57,6 +45,9 @@ public class SimpleMessageResponse {
     this.success = success;
   }
 
+  /**
+   * number	Number of messages that could not be processed.
+   */
   public int getFailure() {
     return failure;
   }
@@ -65,6 +56,10 @@ public class SimpleMessageResponse {
     this.failure = failure;
   }
 
+  /**
+   * Number of results that contain a canonical registration token. See the registration overview
+   * for more discussion of this topic.
+   */
   public int getCanonicalIds() {
     return canonicalIds;
   }
@@ -73,6 +68,12 @@ public class SimpleMessageResponse {
     this.canonicalIds = canonicalIds;
   }
 
+  /**
+   * Array of objects representing the status of the messages processed.
+   * The objects are listed in the same order as the request (i.e., for each registration ID in the request,
+   * its result is listed in the same index in the response).
+   */
+
   public List<Result> getResults() {
     return results;
   }
@@ -80,7 +81,6 @@ public class SimpleMessageResponse {
   public void setResults(List<Result> results) {
     this.results = results;
   }
-
 
 
   @Override

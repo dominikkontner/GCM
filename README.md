@@ -59,6 +59,9 @@ It takes a message, delivers it, returns the server result.
 
 ## Changelog
 
+### 0.3
+* fixes SimpleMessageResponse API
+
 ### 0.2
 * adds Notification Constructor with required fields
 * adds Sender.sendMessage(...) with exponential backoff

@@ -8,17 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class TopicMessageResponse {
 
-  /**
-   * The topic message ID when GCM has successfully received the request and will attempt to deliver to all subscribed devices.
-   */
   @JsonProperty("message_id")
   private String messageId;
-  /**
-   * Error that occurred when processing the message. The possible values can be found in table 11.
-   */
   private String error;
 
 
+  /**
+   * The topic message ID when GCM has successfully received the request and will attempt to deliver to all subscribed devices.
+   */
   public String getMessageId() {
     return messageId;
   }
@@ -27,6 +24,9 @@ public class TopicMessageResponse {
     this.messageId = messageId;
   }
 
+  /**
+   * Error that occurred when processing the message. The possible values can be found in table 11.
+   */
   public String getError() {
     return error;
   }

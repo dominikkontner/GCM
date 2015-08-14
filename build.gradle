@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'java'
 
 sourceCompatibility = 1.7
-version = '0.3'
+version = '0.4.0'
 
 repositories {
     mavenCentral()
@@ -30,4 +30,8 @@ task fatJar(type: Jar) {
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+task generateJavadoc(type: Javadoc) {
+  source = sourceSets.main.allJava
 }

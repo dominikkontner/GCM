@@ -7,86 +7,33 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ *
+ *
  * @author Dominik Kontner
  * @since 1.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 abstract public class AMessage {
 
-  /**
-   * This parameter specifies the recipient of a message.
-   * <p/>
-   * The value must be a registration token or notification key.
-   */
   private String to;
-
-  /**
-   * This parameter specifies the key-value pairs of the notification payload. See Notification payload support for detail.
-   * For more information about notification message and data message options, see Payload.
-   */
   private Notification notification;
-
-  /**
-   * This parameter specifies the key-value pairs of the message's payload.
-   * <p/>
-   * For example, with data:{"score":"3x1"}:
-   * <p/>
-   * On Android, this would result in an intent extra named score with the string value 3x1.
-   * <p/>
-   * On iOS, if the message is sent via APNS, it represents the custom data fields. If it is sent via GCM connection server,
-   * it would be represented as key value dictionary in AppDelegate application:didReceiveRemoteNotification:.
-   * <p/>
-   * The key should not be a reserved word ("from" or any word starting with "google" or "gcm"). Do not use any of the words
-   * defined in this table (such as collapse_key).
-   * <p/>
-   * Values in string types are recommended. You have to convert values in objects or other non-string data types (e.g.,
-   * integers or booleans) to string.
-   */
   private Map<String, String> data;
 
-  /**
-   * This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks.
-   * <p/>
-   * The default value is 4 weeks.
-   */
   @JsonProperty("time_to_live")
   private long timeToLive;
 
-  /**
-   * When this parameter is set to true, it indicates that the message should not be sent until the device becomes active.
-   * The default value is false.
-   */
   @JsonProperty("delay_while_idle")
   private boolean delayWhileIdle;
 
-  /**
-   * This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed,
-   * so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many
-   * of the same messages when the device comes back online or becomes active (see delay_while_idle).
-   * <p/>
-   * Note that there is no guarantee of the order in which messages get sent.
-   * <p/>
-   * Note: A maximum of 4 different collapse keys is allowed at any given time. This means a GCM connection server can simultaneously store 4 different send-to-sync messages per client app. If you exceed this number, there is no guarantee which 4 collapse keys the GCM connection server will keep.
-   */
   @JsonProperty("collapse_key")
   private String collapseKey;
 
-  /**
-   * Sets the priority of the message. Use values between 0 - 10, where the higher value represents higher priority.
-   */
   private short priority;
 
-  /**
-   * This parameter, when set to true, allows developers to test a request without actually sending a message.
-   * <p/>
-   * The default value is false.
-   */
   @JsonProperty("dry_run")
   private boolean dryRun;
 
-  /**
-   * This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
-   */
+
   @JsonProperty("restricted_package_name")
   private String restrictedPackageName;
 
@@ -124,6 +71,13 @@ abstract public class AMessage {
     return to;
   }
 
+  /**
+   * This parameter specifies the recipient of a message.
+   * <p/>
+   * The value must be a registration token or notification key.
+   *
+   * @param to registerId for single message; /topics/foobar for topic message
+   */
   public void setTo(String to) {
     this.to = to;
   }
@@ -132,10 +86,35 @@ abstract public class AMessage {
     return data;
   }
 
+  /**
+   * This parameter specifies the key-value pairs of the message's payload.
+   * <p/>
+   * For example, with data:{"score":"3x1"}:
+   * <p/>
+   * On Android, this would result in an intent extra named score with the string value 3x1.
+   * <p/>
+   * On iOS, if the message is sent via APNS, it represents the custom data fields. If it is sent via GCM connection server,
+   * it would be represented as key value dictionary in AppDelegate application:didReceiveRemoteNotification:.
+   * <p/>
+   * The key should not be a reserved word ("from" or any word starting with "google" or "gcm"). Do not use any of the words
+   * defined in this table (such as collapse_key).
+   * <p/>
+   * Values in string types are recommended. You have to convert values in objects or other non-string data types (e.g.,
+   * integers or booleans) to string.
+   *
+   * @param data key value map
+   */
   public void setData(Map<String, String> data) {
     this.data = data;
   }
 
+  /**
+   * convenience method for {@link #setData(java.util.Map)}
+   * adds a single param to data map
+   *
+   * @param key
+   * @param value
+   */
   public void putData(String key, String value) {
     if (data == null) {
       data = new LinkedHashMap<>();
@@ -147,6 +126,13 @@ abstract public class AMessage {
     return notification;
   }
 
+
+  /**
+   * This parameter specifies the key-value pairs of the notification payload. See Notification payload support for detail.
+   * For more information about notification message and data message options, see Payload.
+   *
+   * @param notification
+   */
   public void setNotification(Notification notification) {
     this.notification = notification;
   }
@@ -155,6 +141,13 @@ abstract public class AMessage {
     return timeToLive;
   }
 
+  /**
+   * This parameter specifies how long (in seconds) the message should be kept in GCM storage if the device is offline. The maximum time to live supported is 4 weeks.
+   * <p/>
+   * The default value is 4 weeks.
+   *
+   * @param timeToLive
+   */
   public void setTimeToLive(long timeToLive) {
     this.timeToLive = timeToLive;
   }
@@ -163,6 +156,12 @@ abstract public class AMessage {
     return delayWhileIdle;
   }
 
+  /**
+   * When this parameter is set to true, it indicates that the message should not be sent until the device becomes active.
+   * The default value is false.
+   *
+   * @param delayWhileIdle
+   */
   public void setDelayWhileIdle(boolean delayWhileIdle) {
     this.delayWhileIdle = delayWhileIdle;
   }
@@ -171,6 +170,17 @@ abstract public class AMessage {
     return collapseKey;
   }
 
+  /**
+   * This parameter identifies a group of messages (e.g., with collapse_key: "Updates Available") that can be collapsed,
+   * so that only the last message gets sent when delivery can be resumed. This is intended to avoid sending too many
+   * of the same messages when the device comes back online or becomes active (see delay_while_idle).
+   * <p/>
+   * Note that there is no guarantee of the order in which messages get sent.
+   * <p/>
+   * Note: A maximum of 4 different collapse keys is allowed at any given time. This means a GCM connection server can simultaneously store 4 different send-to-sync messages per client app. If you exceed this number, there is no guarantee which 4 collapse keys the GCM connection server will keep.
+   *
+   * @param collapseKey
+   */
   public void setCollapseKey(String collapseKey) {
     this.collapseKey = collapseKey;
   }
@@ -180,6 +190,11 @@ abstract public class AMessage {
     return priority;
   }
 
+  /**
+   * Sets the priority of the message. Use values between 0 - 10, where the higher value represents higher priority.
+   *
+   * @param priority
+   */
   public void setPriority(short priority) {
     this.priority = priority;
   }
@@ -188,6 +203,13 @@ abstract public class AMessage {
     return dryRun;
   }
 
+  /**
+   * This parameter, when set to true, allows developers to test a request without actually sending a message.
+   * <p/>
+   * The default value is false.
+   *
+   * @param dryRun
+   */
   public void setDryRun(boolean dryRun) {
     this.dryRun = dryRun;
   }
@@ -196,6 +218,11 @@ abstract public class AMessage {
     return restrictedPackageName;
   }
 
+  /**
+   * This parameter specifies the package name of the application where the registration tokens must match in order to receive the message.
+   *
+   * @param restrictedPackageName
+   */
   public void setRestrictedPackageName(String restrictedPackageName) {
     this.restrictedPackageName = restrictedPackageName;
   }
