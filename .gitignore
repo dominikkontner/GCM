@@ -1,7 +1,6 @@
 build/
 **/test/*
 .gradle
-gradle
 
 # Compiled source #
 ###################
