@@ -17,7 +17,6 @@ repositories {
 }
 
 dependencies {
-
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
     compile("org.springframework:spring-web:4.2.0.RELEASE")
@@ -34,4 +33,11 @@ task fatJar(type: Jar) {
 
 task generateJavadoc(type: Javadoc) {
   source = sourceSets.main.allJava
+}
+
+task zip(type:Zip, dependsOn: ['clean', 'generateJavadoc', 'jar', 'fatJar']) {
+    from ('build/docs')
+    from('build/libs')
+    include '**/*'
+    destinationDir file('dir') // directory that you want your archive to be placed in
 }
